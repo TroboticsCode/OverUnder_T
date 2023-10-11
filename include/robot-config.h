@@ -8,8 +8,14 @@ extern brain Brain;
 // VEXcode devices - declare new devices here, set them up
 // in robot-config.cpp
 extern controller Controller1;
-extern motor tester;
 
+extern motor Cata1;
+extern motor Cata2;
+extern motor Intake;
+
+
+extern pneumatics flaps;
+extern pneumatics intake;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.

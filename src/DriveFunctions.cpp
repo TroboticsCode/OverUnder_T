@@ -20,8 +20,8 @@ void initDriveMotors()
 {
   for(uint8_t i = 0; i < numDriveMotors; i++)
   {
-    leftDriveMotors.push_back(motor(leftDrivePorts[i], GEAR_SET, false));
-    rightDriveMotors.push_back(motor(rightDrivePorts[i], GEAR_SET, true));
+    leftDriveMotors.push_back(motor(leftDrivePorts[i], GEAR_SET, true));
+    rightDriveMotors.push_back(motor(rightDrivePorts[i], GEAR_SET, false));
   }
 
   setDriveBrake(brakeType::coast);

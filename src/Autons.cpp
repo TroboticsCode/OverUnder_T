@@ -25,23 +25,33 @@ void noAuton()
   //LEAVE IN PLACE!
 }
 
-void Auton1()
-{
-  //setRotGains(0.001, 0.001, 0.001, 20, 10); //update PID gains to tune robot
-  //setLinGains(0.001, 0.001, 0.001, 20, 10);
-
-  Brain.Screen.print("I AM AUTON 1");
-  Brain.Screen.newLine();
-
-  moveLinear(48, 100, 10000);
-  moveLinear(-48, 100, 100000);
-
-  moveRotate(720, 100, 100000);
-  moveRotate(-720, 100, 100000);
+void Auton1() {
+  moveLinear(32, 75, 2000);
+  moveStop(coast);
+  wait(1000, msec);
+  moveLinear(-32, 75, 2000);
+  moveStop(coast);
+  wait(1000, msec);
+  flaps.open();
+  moveLinear(22, 75, 2000);
+  moveStop(coast);
+  flaps.close();
+  moveLinear(-18, 75, 2000);
+  moveRotate(120, 75, 2000);
+  moveLinear(36, 75, 2000);
+  flaps.open();
 }
 
-void Auton2()
-{
-  Brain.Screen.print("I AM AUTON 2");
+void Auton2() {
+  moveLinear(36, 80, 2000);
+  moveStop(coast);
+  wait(1000, msec);
+  moveLinear(-3, 75, 2000);
+  moveStop(coast);
+  wait(1000, msec);
+  moveRotate(-80, 75, 2000);
+  moveLinear(48, 75, 2000);
+  flaps.open();
+  moveRotate(40, 75, 2000);
 
 }

@@ -10,8 +10,13 @@ brain  Brain;
 
 // VEXcode device constructors
 controller Controller1 = controller(primary);
-motor tester = motor(PORT17, GREEN, true);
 
+motor Cata1 = motor(PORT11, ratio18_1, false);
+motor Cata2 = motor(PORT12, ratio18_1, false);
+motor Intake = motor(PORT10, ratio18_1, false);
+
+pneumatics flaps = pneumatics(Brain.ThreeWirePort.A);
+pneumatics intake = pneumatics(Brain.ThreeWirePort.B);
 // VEXcode generated functions
 
 

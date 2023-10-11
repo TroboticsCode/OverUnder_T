@@ -62,19 +62,56 @@ void autonomous(void)
 
 void usercontrol(void) { 
   //add local user control variables here:
-  tester.setVelocity(100, pct);
+  Cata1.setVelocity(100, percent);
+  Cata2.setVelocity(100, percent);
+  Intake.setVelocity(100, percent);
+  Cata1.setStopping(coast);
+  Cata2.setStopping(coast);
+  Intake.setStopping(coast);
 
+  flaps.open();
+  flaps.close();
+
+  intake.open();
+  intake.close();
+
+  bool intakeOut = false;
   //User control code here, inside the loop:
   //remove existing demo code and replace with you own! Then remove this comment
   while (1) {
-    if(Controller1.ButtonA.pressing())
-    {
-      tester.spin(directionType::fwd, 100, velocityUnits::pct);
+   if (Controller1.ButtonR1.pressing() && intakeOut == true) {
+      Cata1.spin(reverse);
+      Cata2.spin(reverse);
+    } else {
+      Cata1.stop();
+      Cata2.stop();
     }
-    else
-    {
-      tester.stop(brakeType::coast);
+
+    if(Controller1.ButtonL1.pressing()) {
+      flaps.open();
     }
+    if(Controller1.ButtonL2.pressing()) {
+      flaps.close();
+    }
+
+    if (Controller1.ButtonRight.pressing()) {
+      Intake.spin(directionType::fwd);
+    } else if (Controller1.ButtonY.pressing()) {
+      Intake.spin(reverse);
+    } else {
+      Intake.stop();
+    }
+
+    if(Controller1.ButtonB.pressing()) {
+      intake.open();
+      intakeOut = true;
+    }
+    if(Controller1.ButtonDown.pressing()) {
+      intake.close();
+      intakeOut = false;
+    }
+
+    // Sleep the task for a short amount of time to
     //leave the drive code here, it should work if you set up 
     // DriveFunctionsConfig.h properly
     userDrive();
