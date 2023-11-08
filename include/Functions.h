@@ -9,5 +9,7 @@
 //lift, claw, etc
 //drive function prototypes can go here but they should be in the DriveFunctions.h file
 void testPID(void);
+void cataSpin(float shots, int velocity, uint32_t timeOut);
+
 
 #endif

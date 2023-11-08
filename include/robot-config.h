@@ -13,9 +13,10 @@ extern motor Cata1;
 extern motor Cata2;
 extern motor Intake;
 
-
 extern pneumatics flaps;
 extern pneumatics intake;
+extern pneumatics balance;
+
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.

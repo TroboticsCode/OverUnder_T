@@ -17,6 +17,8 @@ motor Intake = motor(PORT10, ratio18_1, false);
 
 pneumatics flaps = pneumatics(Brain.ThreeWirePort.A);
 pneumatics intake = pneumatics(Brain.ThreeWirePort.B);
+pneumatics balance = pneumatics(Brain.ThreeWirePort.C);
+
 // VEXcode generated functions
 
 

@@ -137,15 +137,15 @@ void moveLinear(float distance, int velocity, uint32_t timeOut)
 #elif !defined (PID)
   for(uint8_t i = 0; i<numDriveMotors; i++)
   {
-    leftDriveMotors[i].spinFor(rotations, rotationUnits::rev, velocity, velocityUnits::pct, false);
+    leftDriveMotors[i].rotateFor(rotations, rotationUnits::rev, velocity, velocityUnits::pct, false);
 
     if(i == numDriveMotors-1) //this is the last motor in the array and needs to be blocking so we complete the move
     {
-      rightDriveMotors[i].spinFor(rotations, rotationUnits::rev, velocity, velocityUnits::pct, true);
+      rightDriveMotors[i].rotateFor(rotations, rotationUnits::rev, velocity, velocityUnits::pct, true);
     }
     else
     {
-      rightDriveMotors[i].spinFor(rotations, rotationUnits::rev, velocity, velocityUnits::pct, false);
+      rightDriveMotors[i].rotateFor(rotations, rotationUnits::rev, velocity, velocityUnits::pct, false);
     }
 
   }

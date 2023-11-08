@@ -62,6 +62,7 @@ void autonomous(void)
 
 void usercontrol(void) { 
   //add local user control variables here:
+  // Sets velocities andf braking for catapult and intake motors
   Cata1.setVelocity(100, percent);
   Cata2.setVelocity(100, percent);
   Intake.setVelocity(100, percent);
@@ -69,46 +70,84 @@ void usercontrol(void) {
   Cata2.setStopping(coast);
   Intake.setStopping(coast);
 
+  // Unnecesarily opens and closes solenoids (so does nothing)
   flaps.open();
   flaps.close();
 
   intake.open();
   intake.close();
 
-  bool intakeOut = false;
+  balance.open();
+  balance.close();
+
+  // Initializes cataSpin (wether catapult is on) to false
+  bool cataSpin = false;
   //User control code here, inside the loop:
   //remove existing demo code and replace with you own! Then remove this comment
   while (1) {
-   if (Controller1.ButtonR1.pressing() && intakeOut == true) {
+   // Catapult control - on / off switch
+    if (Controller1.ButtonR1.pressing()) {
+      // Turns on catapult when R1 is pressed
+      cataSpin = true;
+      // Extends intake when catapult spins so they don't hit each other
+      intake.open();
+    } else if (Controller1.ButtonR2.pressing()) {
+      // Turns off catapult when R2 is pressed
+      cataSpin = false;
+    }
+    
+    // Catapult control - Motor controll
+    if (cataSpin == true) {
+      // Turns on catapult motors when cataSpin is on
       Cata1.spin(reverse);
       Cata2.spin(reverse);
     } else {
+      // Turns off catapult motors when cataSpin is off
       Cata1.stop();
       Cata2.stop();
     }
 
-    if(Controller1.ButtonL1.pressing()) {
+    // Flap control
+    if (Controller1.ButtonL1.pressing()) {
+      // Opens flaps when L1 is pressed
       flaps.open();
     }
-    if(Controller1.ButtonL2.pressing()) {
+    if (Controller1.ButtonL2.pressing()) {
+      // Closes flaps when Ls is pressed
       flaps.close();
     }
 
+    // Intake control
     if (Controller1.ButtonRight.pressing()) {
+      // Runs intake inward when Front Left Scuff is pressed
       Intake.spin(directionType::fwd);
+      // Extends intake automaticaly - speeds up intake process
+      intake.open();
     } else if (Controller1.ButtonY.pressing()) {
+      // Runs intake outward when Front Right Scuff is pressed
       Intake.spin(reverse);
+      // Extends intake automaticaly - speeds up intake process
+      intake.open();
     } else {
+      // Stops intake otherwise
       Intake.stop();
     }
 
-    if(Controller1.ButtonB.pressing()) {
+    // Intake extension control
+    if (Controller1.ButtonB.pressing()) {
+      // Extends intake when Bottom Right Scuff is pressed
       intake.open();
-      intakeOut = true;
     }
-    if(Controller1.ButtonDown.pressing()) {
+    if (Controller1.ButtonDown.pressing()) {
+      // Retracts intake when ottom Left Scuff is pressed
       intake.close();
-      intakeOut = false;
+    }
+
+    // banacing arm control
+    if (Controller1.ButtonA.pressing() && Controller1.ButtonLeft.pressing()) {
+      // Extends the catapult arm only if A and LEFT are pressed
+      // irreversible, prevents accideltal operation
+      balance.open();
     }
 
     // Sleep the task for a short amount of time to
